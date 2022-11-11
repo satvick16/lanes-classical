@@ -33,17 +33,19 @@ def image_prep(src):
                                    blockSize=3,
                                    C=const)
 
-    src = thresh.copy()
+    # src = thresh.copy()
 
     # cv2.imshow("test", src)
     # cv2.waitKey()
 
     # use Canny edge detector
-    dst = cv2.Canny(src,
-                    threshold1=900,
-                    threshold2=1000,
-                    edges=None,
-                    apertureSize=7)
+    # dst = cv2.Canny(src,
+    #                 threshold1=900,
+    #                 threshold2=1000,
+    #                 edges=None,
+    #                 apertureSize=7)
+
+    dst = thresh
 
     # cv2.imshow("test", dst)
     # cv2.waitKey()
