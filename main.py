@@ -1,6 +1,7 @@
 import os
 import cv2
 import numpy as np
+import time
 
 INPUT = "C:\\Users\\16474\\Desktop\\lanes-utra\\input"
 OUTPUT = "C:\\Users\\16474\\Desktop\\lanes-utra\\output"
@@ -28,8 +29,8 @@ def image_prep(src):
     thresh = cv2.adaptiveThreshold(src,
                                    maxValue=255,
                                    adaptiveMethod=cv2.ADAPTIVE_THRESH_GAUSSIAN_C,
-                                   thresholdType=cv2.THRESH_BINARY,
-                                   blockSize=11,
+                                   thresholdType=cv2.THRESH_BINARY_INV,
+                                   blockSize=3,
                                    C=const)
 
     src = thresh.copy()
@@ -42,7 +43,7 @@ def image_prep(src):
                     threshold1=900,
                     threshold2=1000,
                     edges=None,
-                    apertureSize=3)
+                    apertureSize=7)
 
     # cv2.imshow("test", dst)
     # cv2.waitKey()
@@ -51,9 +52,13 @@ def image_prep(src):
 
 
 def main():
+    ts = []
+
     # iterate through input files
     for filename in os.listdir(INPUT):
         f = os.path.join(INPUT, filename)
+
+        t1 = time.time()
 
         src = cv2.imread(f, cv2.IMREAD_GRAYSCALE)
         shape = src.shape
@@ -61,8 +66,14 @@ def main():
         # denoise, threshold, canny
         dst = image_prep(src)
 
+        t2 = time.time()
+
+        ts.append(t2 - t1)
+
         # save output image
         cv2.imwrite(OUTPUT + "\\" + filename, dst)
+
+    print(sum(ts) / len(ts))
 
 
 if __name__ == "__main__":
