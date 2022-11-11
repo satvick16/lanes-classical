@@ -50,7 +50,6 @@ def image_prep(src):
     return dst
 
 
-
 def main():
     # iterate through input files
     for filename in os.listdir(INPUT):
