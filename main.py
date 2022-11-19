@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 INPUT = "C:\\Users\\16474\\Desktop\\lanes-utra\\lanes-big-in"
 OUTPUT = "C:\\Users\\16474\\Desktop\\lanes-utra\\lanes-big-out"
 
-def image_prep(src):
+def lanes(src):
     br = np.average(src)
 
     if br < 50:
@@ -40,7 +40,7 @@ def main():
         t1 = time.time()
 
         src = cv2.imread(f, cv2.IMREAD_GRAYSCALE)
-        dst = image_prep(src)
+        dst = lanes(src)
 
         t2 = time.time()
 
