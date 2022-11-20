@@ -8,19 +8,12 @@ INPUT = "C:\\Users\\16474\\Desktop\\lanes-utra\\lanes-big-in"
 OUTPUT = "C:\\Users\\16474\\Desktop\\lanes-utra\\lanes-big-out"
 
 def lanes(src):
-    br = np.average(src)
-
-    if br < 50:
-        const = 1
-    else:
-        const = 10
-
     thresh = cv2.adaptiveThreshold(src,
                                    maxValue=255,
                                    adaptiveMethod=cv2.ADAPTIVE_THRESH_GAUSSIAN_C,
                                    thresholdType=cv2.THRESH_BINARY_INV,
                                    blockSize=11,
-                                   C=const)
+                                   C=10)
 
     blobs, _ = cv2.findContours(thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
     conts = np.zeros(thresh.shape, np.uint8)
