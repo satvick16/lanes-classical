@@ -54,7 +54,7 @@ def main():
 
         # generate black and white output image
         output_img = get_output_img(resized, mask)
-cd 
+
         # resize image
         scale_percent = 400
         width = int(output_img.shape[1] * scale_percent / 100)
