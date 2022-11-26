@@ -1,11 +1,12 @@
 import os
 import cv2
 import time
+from tqdm import tqdm
 import numpy as np
 import matplotlib.pyplot as plt
 
 INPUT = "C:\\Users\\16474\\Desktop\\lanes-utra\\lanes-big-in"
-OUTPUT = "C:\\Users\\16474\\Desktop\\lanes-utra\\lanes-big-out"
+OUTPUT = "C:\\Users\\16474\\Desktop\\lanes-utra\\contours-out"
 
 def lanes(src):
     thresh = cv2.adaptiveThreshold(src,
@@ -27,7 +28,10 @@ def lanes(src):
 def main():
     ts = []
 
-    for filename in os.listdir(INPUT):
+    for filename in tqdm(os.listdir(INPUT)):
+        # if not (filename.endswith(".png") and int(filename[:-4]) > 150 and int(filename[:-4]) < 300):
+        #     continue
+
         f = os.path.join(INPUT, filename)
 
         t1 = time.time()
